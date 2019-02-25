@@ -1,0 +1,32 @@
+import java.util.*;
+import java.io.*;
+
+public class ParserDemo 
+{
+	public static void main(String[] args)
+	{
+		/*
+		try {
+			FileReader fr = new FileReader("C:\\Users\\Trent\\Desktop");
+			BufferedReader br = new BufferedReader(fr);
+		}
+
+		*/
+		
+		Scanner sc = null;
+		
+		File f = new File("C:\\Users\\Trent\\Desktop\\single cap.txt");
+		
+		try {sc = new Scanner(f);}
+		catch(FileNotFoundException anyletter) {};
+		
+		Parser parser = new Parser(sc);
+		
+		parser.getTopTen(); // WARNING: is currently a System.out test statement
+		
+		
+	}
+
+}
+
+
