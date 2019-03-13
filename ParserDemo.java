@@ -15,7 +15,7 @@ public class ParserDemo
 		
 		Scanner sc = null;
 		
-		File f = new File("C:\\Users\\Trent\\Desktop\\single cap.txt");
+		File f = new File("C:\\Users\\andre\\Desktop\\a.txt");
 		
 		try {sc = new Scanner(f);}
 		catch(FileNotFoundException anyletter) {};
