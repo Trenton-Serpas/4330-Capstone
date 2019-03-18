@@ -1,3 +1,4 @@
+package parserdemo;
 import java.util.*;
 import java.io.*;
 
@@ -5,6 +6,14 @@ public class ParserDemo
 {
 	public static void main(String[] args)
 	{
+		/*
+		testing the connection and add
+		mySQLConnector con = new mySQLConnector("root", "Halfhonesttea15");
+        String str = con.retrieve(7);
+        con.add("test", "this is a test", "testing testing 1 2 3");
+        System.out.println(str);
+		*/
+
 		/*
 		try {
 			FileReader fr = new FileReader("C:\\Users\\Trent\\Desktop");
@@ -15,7 +24,7 @@ public class ParserDemo
 		
 		Scanner sc = null;
 		
-		File f = new File("C:\\Users\\Trent\\Desktop\\single cap.txt");
+		File f = new File("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\text1.txt");
 		
 		try {sc = new Scanner(f);}
 		catch(FileNotFoundException anyletter) {};
