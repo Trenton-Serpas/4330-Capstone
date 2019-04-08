@@ -39,28 +39,27 @@ public class webClient
 	//TODO think about infinite runtime
 	public void waitForInput() throws InterruptedException
 	{
-		while(!socScan.hasNext())
+		while(true)
 		{
-			Thread.sleep(1000);
-		}
-		
-		String[] input = readInput();
-	
-		if(input[0] == null && input[1] == null)
-		{
-			System.out.println("Error: Unable to read input");
-			return;
-		}
-		
-		
-		Parser p = new Parser(new Scanner(input[1]));
-		String[] topTen = p.getTopTen();
-		
-		
-
-		
+			while(!socScan.hasNext())
+			{
+				Thread.sleep(1000);
+			}
 			
-	
+			String[] input = readInput();
+		
+			if(input[0] == null && input[1] == null)
+			{
+				System.out.println("Error: Unable to read input");
+			}
+			else 
+			{
+				Parser p = new Parser(new Scanner(input[1]));
+				String[] topTen = p.getTopTen();
+				
+				ParserDemo.insertMySQL(input[0], input[1], topTen);
+			}
+		}
 	}
 	
 	public String[] readInput()

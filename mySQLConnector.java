@@ -36,13 +36,14 @@ public class mySQLConnector
 		return doc;
 	}
 	
-	public void add(String title, String content, String keywords)
+	//TODO: modify it to work for the new keyword system
+	public void add(String title, String content, String[] keywords)
 	{
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
             Statement stmt = con.createStatement(); 
-            stmt.executeUpdate("insert into test.documents (title, content, keywords) values('"+title+"', '"+content+"', '"+keywords+"')");
+            stmt.executeUpdate("insert into test.documents (title, content, keywords) values('"+title+"', '"+content+"', '"+keywords[0]+"')");
         }
         catch(Exception e){
             System.out.println(e); 

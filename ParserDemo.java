@@ -3,6 +3,7 @@ import java.io.*;
 
 public class ParserDemo 
 {
+	public static mySQLConnector msdbc;
 	public static void main(String[] args)
 	{
 		/*
@@ -21,7 +22,7 @@ public class ParserDemo
 
 		*/
 		
-		mySQLConnector msdbc = new mySQLConnector("Andrew", "cbasfish");
+		msdbc = new mySQLConnector("Andrew", "cbasfish");
 		
 		msdbc.retrieve(3);
 		
@@ -47,6 +48,11 @@ public class ParserDemo
 		
 	}
 
+	
+	public static void insertMySQL(String title, String content, String[] keywords)
+	{
+		msdbc.add(title, content, keywords);
+	}
 }
 
 
