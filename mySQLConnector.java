@@ -1,6 +1,5 @@
 import java.sql.*;
 
-
 public class mySQLConnector 
 {
 	String username = null;
@@ -20,7 +19,8 @@ public class mySQLConnector
 		{
 			Class.forName("com.mysql.jdbc.Driver");  
 			
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/local", username, password);
+
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
 			Statement stmt = con.createStatement();  
 			ResultSet rs = stmt.executeQuery("show databases; ");  
 			for(int i = 0; rs.next() && i <= index; i++) {}
@@ -29,12 +29,23 @@ public class mySQLConnector
 		}
 		catch(Exception e)
 		{ 
-			System.out.println("oh fuck"); 
+			System.out.println("uh oh"); 
 			return "null";
 		}  
 		
 		return doc;
 	}
 	
-	
+	public void add(String title, String content, String keywords)
+	{
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
+            Statement stmt = con.createStatement(); 
+            stmt.executeUpdate("insert into test.documents (title, content, keywords) values('"+title+"', '"+content+"', '"+keywords+"')");
+        }
+        catch(Exception e){
+            System.out.println(e); 
+        }
+    }
 }
