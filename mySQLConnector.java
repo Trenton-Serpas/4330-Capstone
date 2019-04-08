@@ -1,5 +1,6 @@
 import java.sql.*;
 
+
 public class mySQLConnector 
 {
 	String username = null;
@@ -21,17 +22,19 @@ public class mySQLConnector
 			
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/local", username, password);
 			Statement stmt = con.createStatement();  
-			ResultSet rs = stmt.executeQuery("select * from emp");  
+			ResultSet rs = stmt.executeQuery("show databases; ");  
 			for(int i = 0; rs.next() && i <= index; i++) {}
-			doc = rs.getString(2);
+				System.out.println((doc = rs.getString(2)));
 			con.close();  
 		}
 		catch(Exception e)
 		{ 
-			System.out.println(e); 
+			System.out.println("oh fuck"); 
 			return "null";
 		}  
 		
 		return doc;
 	}
+	
+	
 }

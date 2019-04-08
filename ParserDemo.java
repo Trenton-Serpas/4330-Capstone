@@ -13,9 +13,18 @@ public class ParserDemo
 
 		*/
 		
+		mySQLConnector msdbc = new mySQLConnector("Andrew", "cbasfish");
+		
+		msdbc.retrieve(3);
+		
+		
+		
+		
+		
+		/*
 		Scanner sc = null;
 		
-		File f = new File("C:\\Users\\Trent\\Desktop\\single cap.txt");
+		File f = new File("C:\\Users\\andre\\Desktop\\a.txt");
 		
 		try {sc = new Scanner(f);}
 		catch(FileNotFoundException anyletter) {};
@@ -23,7 +32,7 @@ public class ParserDemo
 		Parser parser = new Parser(sc);
 		
 		parser.getTopTen(); // WARNING: is currently a System.out test statement
-		
+		*/
 		
 	}
 
