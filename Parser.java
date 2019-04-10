@@ -1,4 +1,3 @@
-package parserdemo;
 import java.util.*;
 
 public class Parser 
