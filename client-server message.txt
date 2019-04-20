@@ -1,0 +1,12 @@
+1. create user
+2. login
+3. email user their password
+
+4. Titles
+5. Title and fullbody
+6. word cloud
+7. matching keywords
+
+(Admin only)
+8. upload document
+9. delete doculement
