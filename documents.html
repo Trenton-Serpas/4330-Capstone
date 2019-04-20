@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Cover Template · Bootstrap</title>
+    <title>Documents</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
 
@@ -135,6 +135,31 @@
 	.mastfoot {
 		color: rgba(255, 255, 255, .5);
 	}
+	/*
+	* Function
+	*/
+	.red {
+  color: red;
+  font-weight: bold;
+	}
+	.blue {
+  color: blue;
+  font-weigth: bold;
+	}
+	.green {
+  color: green;
+  font-weight: bold;
+	}
+	.purple {
+  color: purple;
+  font-weight: bold;
+	}
+	.orange {
+  color: orange;
+  font-weight: bold;
+	}
+	
+	
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -146,6 +171,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -153,64 +179,81 @@
     <div class="inner">
       <h3 class="masthead-brand">CSC 4330</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="signin.html">Signup</a>
+		<a class="nav-link active" href="documents.html">Documents</a>
+		<a class="nav-link" href="search.html">Search</a>
       </nav>
     </div>
   </header>
 
   <main role="main" class="inner cover">
+  <div id="table">
 	<table style="width:100%">
   <tr>
-    <th>Documents</th>
+    <th id = "title">Documents</th>
     <th>Open/Word Cloud</th> 
   </tr>
   <tr>
-    <td>The Hunter's Wife</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+    <td id = "title">The Hunter's Wife</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()2">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>An Occurance at Owl Creek Bridge</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">An Occurance at Owl Creek Bridge</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()2">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>The Call of Cthulhu</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">The Call of Cthulhu</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>A Vine on a House</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">A Vine on a House</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>Alexandre</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">Alexandre</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>A New England Nun</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">A New England Nun</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>A Jury of Her Peers</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">A Jury of Her Peers</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>The Man in the Brown Coat</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">The Man in the Brown Coat</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
    <tr>
-	<td>About Love</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">About Love</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
   <tr>
-	<td>To Bulid a Fire</td>
-    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction()">Word Cloud</button></td> 
+	<td id = "title">To Bulid a Fire</td>
+    <td><button onclick="myFunction()">Open</button> <button onclick="myFunction2()">Word Cloud</button></td> 
   </tr>
 </table>
-
+</div>
   </main>
 
   <footer class="mastfoot mt-auto">
   </footer>
 </div>
+<script>  function myFunction(){
+var ele = document.getElementById("table");
+ele.innerHTML = "<h1>The Hunter's Wife</h1><p>It was the hunter's first time outside Montana. He woke, stricken still with the hours-old vision of ascending through rose-lit cumulus, of houses and barns like specks deep in the snowed-in valleys, all the scrolling country below looking December—brown and black hills streaked with snow, flashes of iced-over lakes, the long braids of a river gleaming at the bottom of a canyon. Above the wing the sky had deepened to a blue so pure he knew it would bring tears to his eyes if he looked long enough. Now it was dark. The airplane descended over Chicago, its galaxy of electric lights, the vast neighborhoods coming clearer as the plane glided toward the airport—streetlights, headlights, stacks of buildings, ice rinks, a truck turning at a stoplight, scraps of snow atop a warehouse and winking antennae on faraway hills, finally the long converging parallels of blue runway lights, and they were down.He walked into the airport, past the banks of monitors. Already he felt as if he'd lost something, some beautiful perspective, some lovely dream fallen away. He had come to Chicago to see his wife, whom he had not seen in twenty years. She was there to perform her magic for a higher-up at the state university. Even universities, apparently, were interested in what she could do. Outside the terminal the sky was thick and gray and hurried by wind. Snow was coming. A woman from the university met him and escorted him to her Jeep. He kept his gaze out the window.</p>";
+
+var keywords = ["snow", "blue", "knew", "river"];
+var colors = ["red", "blue", "green", "purple", "orange", "yellow", "lime", "fuchsia", "olive", "teal"]; 
+for(var i = 0; i < keywords.length; i++){
+var oldString = keywords[i];
+var text = $('p').html().replace(RegExp(oldString, "gi"), "<span class='"+colors[i]+"'>"+keywords[i]+"</span>");
+$('p').html(text);
+}
+}
+</script>
+<script type="text/javascript" language="javascript" src="colors.js" defer></script>
 </body>
 </html>
