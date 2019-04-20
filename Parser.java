@@ -31,11 +31,12 @@ public class Parser
 		while(sc.hasNext())
 		{
 			String next = sc.next().toLowerCase();
+			next = next.replaceAll("[^\\w\\s]","");
 			
 			if(!allWords.containsKey(next))
 				allWords.put(next, 1);
 			
-			else
+			else if(!next.equals(""))
 				allWords.put(next, allWords.get(next) + 1);
 		}
 		
