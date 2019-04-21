@@ -3,8 +3,9 @@ import java.util.Scanner;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import javax.servlet.http.HttpServlet;
 
-public class SocketServer 
+public class SocketServer extends HttpServlet 
 {
 	Socket cli;
 	Scanner in;
@@ -13,47 +14,6 @@ public class SocketServer
 	
 	MySQLConnector mc; 
 	//This is hard coded for now
-	
-	enum MessageTypes
-	{
-		insertDoc("abcdefg"),
-		requestTitles("asdfasdfsdfsdf");
-		
-	    private String url;
-	    
-	    MessageTypes(String envUrl) {
-	        this.url = envUrl;
-	    }
-	 
-	    public String getUrl() {
-	        return url;
-	    }
-	}
-	
-	
-
-	public SocketServer(int socketNum)
-	{
-		try {
-			soc = new ServerSocket(socketNum);  
-			cli = soc.accept();
-			in = new Scanner(cli.getInputStream());
-			out = new PrintWriter(cli.getOutputStream());
-			mc = new MySQLConnector("Andrew", "cbasfish", "test");
-			//socScan = new Scanner(soc.getInputStream());
-		} 
-	
-		catch (Exception e) {
-			System.out.println("Error: unable to connect to Socket.");  
-			//socScan.close();
-			return;
-		}
-		
-		
-	}
-	
-	
-	
 	
 	public void waitForInput() throws InterruptedException
 	{
@@ -121,6 +81,17 @@ public class SocketServer
 	
 	public void initWeb()
 	{
+		try {
+			cli = soc.accept();
+			in = new Scanner(cli.getInputStream());
+			out = new PrintWriter(cli.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+		}
+
+		
+		System.out.println("Ready and waitingf");
 		while(true)
 		{
 			if(in.hasNext())
