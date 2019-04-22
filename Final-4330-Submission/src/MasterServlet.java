@@ -22,7 +22,7 @@ public class MasterServlet extends HttpServlet
 	public void init() throws ServletException 
 	{
         mc = new MySQLConnector("Andrew", "cbasfish", "test");
-		System.out.println(mc.retrieve("Select * from documents;"));
+		//System.out.println(mc.retrieve("Select * from documents;"));
 	}
 	
 	
@@ -39,6 +39,13 @@ public class MasterServlet extends HttpServlet
 		//String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
 		//response.getWriter().write(text);
 		
+		//System.out.println(mc.retrieve("select title from documents;"));
+		//System.out.println(getTitles());
+		//System.out.println(getBody("The Hobbit"));
+		//System.out.println(getKeywords("The Hobbit"));
+		
+		if(type == null)
+			return;
 
 		switch(type)
 		{
@@ -178,7 +185,7 @@ public class MasterServlet extends HttpServlet
 				//populate string
 				String html13 = populateHTML("documents.html");
 				
-				boolean deleted = deleteDoc(request.getParameter("title"));
+				deleteDoc(request.getParameter("title"));
 				
 				response.getWriter().write(populateTitles(html13));
 				break;
@@ -194,7 +201,7 @@ public class MasterServlet extends HttpServlet
 	private String populateTitles(String html)
 	{
 		String titlesHTML = "";
-		List<String> titles = getTitles();
+		List<String> titles = Arrays.asList(getTitles());
 		
 		for(int i = 0; i < titles.size(); i++)
 		{
@@ -224,8 +231,8 @@ public class MasterServlet extends HttpServlet
 	
 	private ArrayList<String> search(String key, ArrayList<String> validTitles)
 	{
-		ArrayList<String> titles = getTitles();
-		
+		List<String> titles = Arrays.asList(getTitles());//getTitles();
+		titles.add("asdfasdf");
 		for(int i = 0; i < titles.size(); i++)
 		{
 			String[] keywords = getKeywords(titles.get(i));
@@ -242,7 +249,11 @@ public class MasterServlet extends HttpServlet
 		
 		return validTitles;
 	}
-	
+	public void deleteDoc(String title)
+	{
+		mc.retrieve("delete from documents where title = " + title + ";");
+		//return initTitles.length - getTitles().length; 
+	}
 	public void uploadDoc(String title, String body)
 	{
 		String[] keywords = new String[10];
@@ -250,5 +261,26 @@ public class MasterServlet extends HttpServlet
 		keywords = p.getTopTen();
 		
 		mc.add(title, body, keywords);
+	}
+	
+	public String[] getKeywords(String title)
+	{
+		String temp = mc.retrieve("select keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10 from documents where title = \"" + title + "\";");
+		return temp.split("\n", -1)[1].split("\\0174{2}", -1); //remove column names, second split patter is 2 copies of octal value 174 aka |
+	}
+	
+	public String getTitles()
+	{
+		return mc.retrieve("select title from documents;");
+	}
+	
+	public String getBody(String title)
+	{
+		return mc.retrieve("Select content from documents where title = \"" + title + "\";");
+	}
+	
+	public boolean createUser(String email, String pass)
+	{
+		return true;
 	}
 }
