@@ -96,7 +96,7 @@ public class MySQLConnector
 	{
 		//String sanitizedKeywords;  On second thought, parser.getTopTen always returns an array with 10 elems
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
             Statement stmt = con.createStatement(); 
             stmt.executeUpdate("insert into test.documents (title, content, keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10) "  
@@ -110,4 +110,18 @@ public class MySQLConnector
         
         return true;
     }
+	
+	public void addUser(String email, String pass)
+	{
+        try{
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
+            Statement stmt = con.createStatement(); 
+            stmt.executeUpdate("insert into test.users (pass, email)  values('" + password + "', '" + email+ "')");
+        }
+        catch(Exception e){
+            System.out.println("Failed to add to MySQL DB."); 
+        }
+	}
+	
 }

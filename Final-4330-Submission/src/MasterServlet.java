@@ -35,13 +35,15 @@ public class MasterServlet extends HttpServlet
 	{
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		
-		//System.out.println(type);
+		System.out.println(type);
 		//String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
 		//response.getWriter().write(text);
 		
 		//System.out.println(mc.retrieve("select title from documents;"));
-		//System.out.println(getTitles());
-		//System.out.println(getBody("The Hobbit"));
+		
+		//System.out.println(getTitles()[2]);
+		
+		
 		//System.out.println(getKeywords("The Hobbit"));
 		
 		if(type == null)
@@ -63,7 +65,7 @@ public class MasterServlet extends HttpServlet
 				String html2 = populateHTML("../HTML/documents.html");
 				
 				//create user
-				boolean creationSuccess = createUser(request.getParameter("email"), request.getParameter("pass"));
+				createUser(request.getParameter("email"), request.getParameter("pass"));
 	
 				//update default titles
 				response.getWriter().write(populateTitles(html2));
@@ -219,7 +221,6 @@ public class MasterServlet extends HttpServlet
 	private ArrayList<String> search(String key, ArrayList<String> validTitles)
 	{
 		List<String> titles = Arrays.asList(getTitles());//getTitles();
-		titles.add("asdfasdf");
 		for(int i = 0; i < titles.size(); i++)
 		{
 			String[] keywords = getKeywords(titles.get(i));
@@ -256,9 +257,10 @@ public class MasterServlet extends HttpServlet
 		return temp.split("\n", -1)[1].split("\\0174{2}", -1); //remove column names, second split patter is 2 copies of octal value 174 aka |
 	}
 	
-	public String getTitles()
+	public String[] getTitles()
 	{
-		return mc.retrieve("select title from documents;");
+		String temp[] = mc.retrieve("select title from documents;").split("\n", -1);
+		return Arrays.copyOfRange(temp, 1, temp.length);
 	}
 	
 	public String getBody(String title)
@@ -266,8 +268,13 @@ public class MasterServlet extends HttpServlet
 		return mc.retrieve("Select content from documents where title = \"" + title + "\";");
 	}
 	
-	public boolean createUser(String email, String pass)
+	public void createUser(String email, String pass)
 	{
-		return true;
+		mc.addUser(email, pass);
+	}
+	
+	public void deleteUser(String email)
+	{
+		mc.retrieve("delete from users where email = \"" + email + "\";" );
 	}
 }
