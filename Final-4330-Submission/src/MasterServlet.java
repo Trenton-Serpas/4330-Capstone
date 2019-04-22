@@ -41,8 +41,6 @@ public class MasterServlet extends HttpServlet
 		
 		//System.out.println(mc.retrieve("select title from documents;"));
 		
-		//System.out.println(getTitles()[2]);
-		
 		
 		//System.out.println(getKeywords("The Hobbit"));
 		
@@ -289,5 +287,14 @@ public class MasterServlet extends HttpServlet
 	public void deleteUser(String email)
 	{
 		mc.retrieve("delete from users where email = \"" + email + "\";" );
+	}
+	
+	public boolean login(String email, String pass)
+	{
+		String[] temp = mc.retrieve("select email, pass from users where email = \"" + email + "\" and pass = \"" + pass + "\";").split("\n", -1);
+		if(temp.length > 1)
+			return true;
+		return false;
+		
 	}
 }
