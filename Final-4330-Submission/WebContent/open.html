@@ -4,52 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>Add Document</title>
+    <title>View</title>
+
     <style>
-
-		 input[type=text] {
-			background-color: lightgrey;
-      padding: 5px 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 2px solid white;
-      border-radius: 4px;
-		}
-
-    input[type=text]:focus {
-      border: 3px solid #555;
-    }
-	textarea {
-	  background-color: lightgrey;
-      padding: 5px 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 2px solid white;
-      border-radius: 4px;
-	}
-	textarea:focus{
-	border: 3px solid #555
-	}
-
-		label, legend {
-			font-weight: bold;
-		}
-
-    #addbtn {
-      background-color: white;
-      color: black;
-      font-size: 20px;
-      border: 2px solid #000000;
-      -webkit-transition-duration: 0.4s;
-      transition-duration: 0.4s;
-    }
-
-      #addbtn:hover {
-        background-color: #000000;
-        color: white;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-      }
-
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -72,7 +29,7 @@
 	a,
 	a:focus,
 	a:hover,
-input[type="button"]:hover	{
+	input[type="button"]:hover{
 		color: #fff;
 	}
 
@@ -153,7 +110,7 @@ input[type="button"]:hover	{
 			float: right;
 		}
 	}
-
+	
 	/*
 	* Cover
 	*/
@@ -187,6 +144,8 @@ input[type="button"]:hover	{
 
     </style>
     <link href="cover.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   </head>
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -215,47 +174,19 @@ input[type="button"]:hover	{
   </header>
 
   <main role="main" class="inner cover">
-
-
-	<form action="./MasterServlet" method="get" id="addform">
-	<br>
-	<label> Title: </label>
-	<br>
-	<input type="text" id="title" name="title" align="middle">
-	<br>
-	<label> Content:</label> 
-	<br>
-	<textarea rows="6" cols="50" name="body" id ="content" placeholder="Copy content here" form="addform"></textarea>
-	<br> <br>
-	<input type="hidden" name='type' value='upload complete'>
-	<input type="submit" value= "Add" name = "add" id = "addbtn">
-	</form>
-<br>
-<br>
-<br>
-<p id="Dtitle"></p>
-<p id="Dcontent"></p>
-
-<script>
-function myFunction() {
-  var ws = new WebSocket("ws://localhost:61111");
- 
-  var k1 = document.getElementById("title").value;
-  document.getElementById("Dtitle").innerHTML = k1;
-
-  var k2 = document.getElementById("content").value;
-  document.getElementById("Dcontent").innerHTML = k2;
-    ws.onopen = function(){
-	ws.send("title");
-	ws.send("content");
-	}
-}
-
-</script>
+  
   </main>
 
   <footer class="mastfoot mt-auto">
   </footer>
 </div>
+<script>
+var keywords = [WORDSHERE];
+var colors = ["Thistle", "Aqua", "SpringGreen", "CornflowerBlue", "DarkOrchid", "SeaGreen", "yellow", "Coral", "Crimson", "teal"]; 
+for(var i = 0; i < keywords.length; i++){
+var oldString = keywords[i];
+var text = $('p').html().replace(RegExp(oldString, "gi"), "<span style = 'color: "+colors[i]+";font-weight: bold;text-transform: uppercase;'>"+keywords[i]+"</span>");
+$('p').html(text);
+</script>
 </body>
 </html>

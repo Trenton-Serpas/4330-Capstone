@@ -31,6 +31,7 @@ public class Parser
 		while(sc.hasNext())
 		{
 			String next = sc.next().toLowerCase();
+			//System.out.println(next);
 			next = next.replaceAll("[^\\w\\s]","");
 			
 			if(!allWords.containsKey(next))
@@ -57,8 +58,9 @@ public class Parser
 		{
 			Token t = pq.poll();
 			if(t == null) {}
-			else			
-				System.out.println(t.word);
+			else
+				topTen[i] = t.word;
+				//System.out.println(t.word);
 		}
 			
 		return topTen;

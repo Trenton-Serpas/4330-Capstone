@@ -35,7 +35,7 @@ public class MasterServlet extends HttpServlet
 	{
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		
-		System.out.println(type);
+		System.out.println(type + "make sure");
 		//String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
 		//response.getWriter().write(text);
 		
@@ -217,7 +217,7 @@ public class MasterServlet extends HttpServlet
 			titlesHTML += (titles.get(i) + ", ");
 		}
 		
-		html = html.replaceAll("WORDSHERE", titlesHTML);
+		html.replaceAll("WORDSHERE", titlesHTML);
 		
 		return titlesHTML;
 	}
@@ -266,8 +266,8 @@ public class MasterServlet extends HttpServlet
 	{
 		String[] keywords = new String[10];
 		Parser p = new Parser(new Scanner(body));
-		keywords = p.getTopTen();
 		
+		keywords = p.getTopTen();
 		mc.add(title, body, keywords);
 	}
 	
