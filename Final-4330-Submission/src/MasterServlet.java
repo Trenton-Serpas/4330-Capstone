@@ -40,7 +40,6 @@ public class MasterServlet extends HttpServlet
 		//response.getWriter().write(text);
 		
 
-		
 		switch(type)
 		{
 			case "index": // sends to case
@@ -50,21 +49,17 @@ public class MasterServlet extends HttpServlet
 				//populate string
 				response.getWriter().write(populateHTML("signup.html"));
 				break;
+			
 			case "create complete"://sends to Documents
 				
 				//populate string
 				String html2 = populateHTML("../HTML/documents.html");
 				
 				//create user
-				//boolean creationSuccess = createUser(request.getParameter("email"), request.getParameter("pass"));
-				
-				//fetch titles
-				//List<String> titlesC = getTitles();
-				
+				boolean creationSuccess = createUser(request.getParameter("email"), request.getParameter("pass"));
+	
 				//update default titles
-				
-				
-				response.getWriter().write(html2);
+				response.getWriter().write(populateTitles(html2));
 				
 			case "login": // sends to signin
 				
@@ -81,13 +76,8 @@ public class MasterServlet extends HttpServlet
 				//verify user
 				//boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
 				
-				//fetch titles
-				List<String> titlesLC = getTitles();
-				
 				//update default titles
-				
-				
-				response.getWriter().write(html3);
+				response.getWriter().write(populateTitles(html3));
 				
 			case "email": // sends to passwordemail.html
 				
@@ -100,27 +90,17 @@ public class MasterServlet extends HttpServlet
 				
 				//populate string
 				String html5 = populateHTML("../HTML/documents.html");
-				
-				//fetch titles
-				List<String> titlesEC = getTitles();
-				
-				//update default titles
-				
-				
-				response.getWriter().write(html5);
+	
+				//update default titles	
+				response.getWriter().write(populateTitles(html5));
 				
 			case "documents": //sends to Documents
 				
 				//populate string
 				String html6 = populateHTML("../HTML/documents.html");
-				
-				//fetch titles
-				List<String> titlesD = getTitles();
-				
-				//update default titles
-				
-				
-				response.getWriter().write(html6);
+							
+				//update default titles		
+				response.getWriter().write(populateTitles(html6));
 				
 			case "open": // sends to output
 				
@@ -162,7 +142,7 @@ public class MasterServlet extends HttpServlet
 				validTitles = search(request.getParameter("key3"), validTitles);
 				validTitles = search(request.getParameter("key4"), validTitles);
 				
-				response.getWriter().write(html10);
+				response.getWriter().write(populateTitles(html10));
 				
 			case "upload": // sends to add
 				
@@ -178,8 +158,7 @@ public class MasterServlet extends HttpServlet
 				
 				boolean uploaded = uploadDoc(request.getParameter("title"), request.getParameter("body"));
 				
-				
-				response.getWriter().write(html12);
+				response.getWriter().write(populateTitles(html12));
 				
 			case "delete": // sends to documents
 				
@@ -188,20 +167,28 @@ public class MasterServlet extends HttpServlet
 				
 				boolean deleted = deleteDoc(request.getParameter("title"));
 				
-				response.getWriter().write(html13);
-		}
-		}
+				response.getWriter().write(populateTitles(html13));
 	
+		}
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		doGet(request, response);
 	}
 	
-	private String populateTitles(List<String> titles)
+	private String populateTitles(String html)
 	{
 		String titlesHTML = "";
+		List<String> titles = getTitles();
+		
+		for(int i = 0; i < titles.size(); i++)
+		{
+			titlesHTML += (titles.get(i) + ", ");
+		}
+		
+		html = html.replaceAll("INSERTTITLESHERE", titlesHTML);
 		
 		return titlesHTML;
 	}
