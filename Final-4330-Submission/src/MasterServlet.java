@@ -19,6 +19,12 @@ public class MasterServlet extends HttpServlet
 		
 		switch(type)
 		{
+		case "index": // sends to case
+			
+			String htmlHome = populateHTML("../HTML/index.html");
+			
+			response.getWriter().write(htmlHome);
+		
 		case "create": // sends to signup
 			
 			//populate string
@@ -116,6 +122,8 @@ public class MasterServlet extends HttpServlet
 			//populate string
 			String html8 = populateHTML("../HTML/output.html");
 			
+			String[] keywords = getKeywords(request.getParameter("email"));
+			
 			response.getWriter().write(html8);
 			
 		case "search": // sends to search
@@ -129,6 +137,12 @@ public class MasterServlet extends HttpServlet
 			
 			//populate string
 			String html10 = populateHTML("../HTML/documents.html");
+			
+			ArrayList<String> validTitles = new ArrayList<String>();
+			validTitles = search(request.getParameter("key1"), validTitles);
+			validTitles = search(request.getParameter("key2"), validTitles);
+			validTitles = search(request.getParameter("key3"), validTitles);
+			validTitles = search(request.getParameter("key4"), validTitles);
 			
 			response.getWriter().write(html10);
 			
@@ -144,12 +158,17 @@ public class MasterServlet extends HttpServlet
 			//populate string
 			String html12 = populateHTML("../HTML/documents.html");
 			
+			boolean uploaded = uploadDoc(request.getParameter("title"), request.getParameter("body"));
+			
+			
 			response.getWriter().write(html12);
 			
 		case "delete": // sends to documents
 			
 			//populate string
 			String html13 = populateHTML("../HTML/documents.html");
+			
+			boolean deleted = deleteDoc(request.getParameter("title"));
 			
 			response.getWriter().write(html13);
 		}
@@ -158,6 +177,13 @@ public class MasterServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		doGet(request, response);
+	}
+	
+	private String populateTitles(List<String> titles)
+	{
+		String titlesHTML = "";
+		
+		return titlesHTML;
 	}
 
 	private String populateHTML(String path)
@@ -173,5 +199,26 @@ public class MasterServlet extends HttpServlet
 		catch(Exception exe) {}
 				
 		return html;
+	}
+	
+	private ArrayList<String> search(String key, ArrayList<String> validTitles)
+	{
+		ArrayList<String> titles = getTitles();
+		
+		for(int i = 0; i < titles.size(); i++)
+		{
+			String[] keywords = getKeywords(titles.get(i));
+			
+			for(int j = 0; j < keywords.length; j++)
+			{
+				if(keywords[j] == key)
+				{
+					validTitles.add(titles.get(i));
+					break;
+				}
+			}
+		}
+		
+		return validTitles;
 	}
 }
