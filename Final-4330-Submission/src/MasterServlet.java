@@ -162,13 +162,22 @@ public class MasterServlet extends HttpServlet
 				//populate string
 				String html10 = populateHTML("documents.html");
 				
-				ArrayList<String> validTitles = new ArrayList<String>();
-				validTitles = search(request.getParameter("key1"), validTitles);
-				validTitles = search(request.getParameter("key2"), validTitles);
-				validTitles = search(request.getParameter("key3"), validTitles);
-				validTitles = search(request.getParameter("key4"), validTitles);
+				String[] keys = new String[]{request.getParameter("key1"), request.getParameter("key2"), request.getParameter("key3"), request.getParameter("key4")};
 				
-				response.getWriter().write(populateTitles(html10));
+				ArrayList<String> validTitles = new ArrayList<String>();
+				validTitles = search(keys);
+				
+				
+				String temp = "";
+				int is;
+				for(is = 0; is < validTitles.size() - 2; is++)
+				{
+					temp += "\"" + (validTitles.get(is) + "\", ");
+				}
+				
+				temp += "\"" + (validTitles.get(is)) + "\"";
+				
+				response.getWriter().write(html10.replaceAll("WORDSHERE", temp));
 				break;
 				
 			case "upload": // sends to add
@@ -239,24 +248,28 @@ public class MasterServlet extends HttpServlet
 		return html;
 	}
 	
-	private ArrayList<String> search(String key, ArrayList<String> validTitles)
+	private ArrayList<String> search(String[] keys)
 	{
-		List<String> titles = Arrays.asList(getTitles());//getTitles();
-		for(int i = 0; i < titles.size(); i++)
+		ArrayList<String> retVal = new ArrayList<String>();
+		String[] titles = getTitles();//getTitles();
+		for(int i = 0; i < titles.length; i++)
 		{
-			String[] keywords = getKeywords(titles.get(i));
+			String[] keywords = getKeywords(titles[i]);
 			
 			for(int j = 0; j < keywords.length; j++)
 			{
-				if(keywords[j] == key)
+				if(keywords[j].compareTo(keys[0]) == 0 || 
+						keywords[j].compareTo(keys[1]) == 0 ||
+						keywords[j].compareTo(keys[2]) == 0 || 
+						keywords[j].compareTo(keys[3]) == 0)
 				{
-					validTitles.add(titles.get(i));
+					retVal.add(titles[i]);
 					break;
 				}
 			}
 		}
 		
-		return validTitles;
+		return retVal;
 	}
 	public void deleteDoc(String title)
 	{

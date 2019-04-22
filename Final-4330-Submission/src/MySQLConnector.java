@@ -134,7 +134,7 @@ public class MySQLConnector
             //Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
             Statement stmt = con.createStatement(); 
-            stmt.executeUpdate("insert into test.users (pass, email)  values('" + password + "', '" + email+ "');");
+            stmt.executeUpdate("insert into test.users (pass, email)  values('" + pass + "', '" + email+ "');");
         }
         catch(Exception e){
             System.out.println("Failed to add to MySQL DB."); 
