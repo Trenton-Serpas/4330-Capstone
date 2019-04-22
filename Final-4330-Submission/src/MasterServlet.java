@@ -51,9 +51,10 @@ public class MasterServlet extends HttpServlet
 
 		switch(type)
 		{
-			case "index": // sends to case
+			case "index": // sends to index
 				response.getWriter().write(populateHTML("index.html"));
 				break;
+				
 			case "create": // sends to signup
 				//populate string
 				response.getWriter().write(populateHTML("signup.html"));
@@ -62,88 +63,97 @@ public class MasterServlet extends HttpServlet
 			case "create complete"://sends to Documents
 				
 				//populate string
-				String html2 = populateHTML("../HTML/documents.html");
+				String html2 = populateHTML("documents.html");
 				
 				//create user
 				createUser(request.getParameter("email"), request.getParameter("pass"));
 	
 				//update default titles
 				response.getWriter().write(populateTitles(html2));
+				break;
 				
 			case "login": // sends to signin
 				
 				//populate string
-				String htmlL = populateHTML("../HTML/signin.html");
+				String htmlL = populateHTML("signin.html");
 				
 				response.getWriter().write(htmlL);
+				break;
 				
 			case "login complete"://sends to Documents
 				
 				//populate string
-				String html3 = populateHTML("../HTML/documents.html");
+				String html3 = populateHTML("documents.html");
 				
 				//verify user
-				//boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
+				boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
 				
 				//update default titles
 				response.getWriter().write(populateTitles(html3));
+				break;
 				
 			case "email": // sends to passwordemail.html
 				
 				//populate string
-				String html4 = populateHTML("../HTML/passwordemail.html");
+				String html4 = populateHTML("passwordemail.html");
 				
 				response.getWriter().write(html4);
+				break;
 				
 			case "email complete": //sends to Documents
 				
 				//populate string
-				String html5 = populateHTML("../HTML/documents.html");
+				String html5 = populateHTML("documents.html");
 	
 				//update default titles	
 				response.getWriter().write(populateTitles(html5));
+				break;
 				
 			case "documents": //sends to Documents
 				
 				//populate string
-				String html6 = populateHTML("../HTML/documents.html");
+				String html6 = populateHTML("documents.html");
 							
 				//update default titles		
 				response.getWriter().write(populateTitles(html6));
+				break;
 				
 			case "open": // sends to output
 				
 				//populate string
-				String html7 = populateHTML("../HTML/output.html");
+				String html7 = populateHTML("output.html");
 				
 				//fetch title and text
-				String titleAndFullbody = getBody("temp");
+				String body = getBody(request.getParameter("title"));
+				
+				html7 = html7.replaceAll("INSERTOUTPUTHERE", body);
 				
 				//output text		
-				
-				
 				response.getWriter().write(html7);
+				break;
 				
 			case "wordcloud": // sends to output
 				
 				//populate string
-				String html8 = populateHTML("../HTML/output.html");
+				String html8 = populateHTML("output.html");
 				
 				String[] keywords = getKeywords(request.getParameter("email"));
 				
 				response.getWriter().write(html8);
+				break;
 				
 			case "search": // sends to search
 				
 				//populate string
-				String html9 = populateHTML("../HTML/search.html");
+				String html9 = populateHTML("search.html");
 				
 				response.getWriter().write(html9);
+				break;
 				
 			case "search complete": // sends to documents
 				
 				//populate string
-				String html10 = populateHTML("../HTML/documents.html");
+				String html10 = populateHTML("documents.html");
 				
 				ArrayList<String> validTitles = new ArrayList<String>();
 				validTitles = search(request.getParameter("key1"), validTitles);
@@ -152,32 +162,35 @@ public class MasterServlet extends HttpServlet
 				validTitles = search(request.getParameter("key4"), validTitles);
 				
 				response.getWriter().write(populateTitles(html10));
+				break;
 				
 			case "upload": // sends to add
 				
 				//populate string
-				String html11 = populateHTML("../HTML/add.html");
+				String html11 = populateHTML("add.html");
 				
 				response.getWriter().write(html11);
+				break;
 				
 			case "upload complete": // sends to documents
 				
 				//populate string
-				String html12 = populateHTML("../HTML/documents.html");
+				String html12 = populateHTML("documents.html");
 				
 				uploadDoc(request.getParameter("title"), request.getParameter("body"));
 				
 				response.getWriter().write(populateTitles(html12));
+				break;
 				
 			case "delete": // sends to documents
 				
 				//populate string
-				String html13 = populateHTML("../HTML/documents.html");
+				String html13 = populateHTML("documents.html");
 				
 				deleteDoc(request.getParameter("title"));
 				
 				response.getWriter().write(populateTitles(html13));
-	
+				break;
 		}
 	}
 	
