@@ -13,7 +13,7 @@ public class MySQLConnector
 		username = user;
 		password = pass;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (ClassNotFoundException e1) {
 			System.out.println("Error: Unable to find DB connector");
 			System.out.println(e1);

@@ -1,12 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <title>Search</title>
 
-   <title>Welcome</title>
     <style>
+	
+		label input {
+			background-color: lightgrey;
+      padding: 5px 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid white;
+      border-radius: 4px;
+		}
+
+    input[type=text]:focus {
+      border: 3px solid #555;
+    }
+
+		label, legend {
+			font-weight: bold;
+		}
+
+    button {
+      background-color: white;
+      color: black;
+      font-size: 20px;
+      border: 2px solid #000000;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s;
+    }
+
+      button:hover {
+        background-color: #000000;
+        color: white;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -133,44 +166,81 @@
     </style>
     <link href="cover.css" rel="stylesheet">
   </head>
-<body>
-<body class="text-center">
+  <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
       <h3 class="masthead-brand">CSC 4330</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="index.html">Home</a>
-        <a class="nav-link" href="signup.html">Signup</a>
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="signin.html">Signup</a>
 		<a class="nav-link" href="documents.html">Documents</a>
-		<a class="nav-link" href="search.html">Search</a>
+		<a class="nav-link active" href="search.html">Search</a>
       </nav>
     </div>
-	<hr>asdfasdflkjas dfljsalfd jaslf jas;lk fjs flsa jfals f </hr>
-
-
-<form action="./MasterServlet" method="get">
-<input type="hidden" name="type" value="login">
-<input type="submit" value="Clickme">
-
-</form>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Welcome!</h1>
-    <p class="lead">Sign in to find great documents and if you have not signed up then sign up!
-	</p>
-    <p class="lead">
-      <a href="signin.html" class="btn btn-lg btn-secondary">Sign In</a>
-    </p>
+
+
+<form>
+	<label> Keyword 1: <input type="text" id="keyword1"> </label>  <br>
+	<label> Keyword 2: <input type="text" id="keyword2"> </label>  <br>
+	<label> Keyword 3: <input type="text" id="keyword3"> </label>  <br>
+	<label> Keyword 4: <input type="text" id="keyword4"> </label>  <br>
+
+</form>
+<br>
+<button onclick="myFunction()">Search</button>
+
+<p id="key1"></p>
+<p id="key2"></p>
+<p id="key3"></p>
+<p id="key4"></p>
+<p id="key5"></p>
+<p id="key6"></p>
+<p id="key7"></p>
+<p id="key8"></p>
+<p id="key9"></p>
+<p id="key10"></p>
+
+<script>
+function myFunction() {
+  var k1 = document.getElementById("keyword1").value;
+  document.getElementById("key1").innerHTML = k1;
+
+  var k2 = document.getElementById("keyword2").value;
+  document.getElementById("key2").innerHTML = k2;
+
+  var k3 = document.getElementById("keyword3").value;
+  document.getElementById("key3").innerHTML = k3;
+
+  var k4 = document.getElementById("keyword4").value;
+  document.getElementById("key4").innerHTML = k4;
+
+  var k5 = document.getElementById("keyword5").value;
+  document.getElementById("key5").innerHTML = k5;
+
+  var k6 = document.getElementById("keyword6").value;
+  document.getElementById("key6").innerHTML = k6;
+
+  var k7 = document.getElementById("keyword7").value;
+  document.getElementById("key7").innerHTML = k7;
+
+  var k8 = document.getElementById("keyword8").value;
+  document.getElementById("key8").innerHTML = k8;
+
+  var k9 = document.getElementById("keyword9").value;
+  document.getElementById("key9").innerHTML = k9;
+
+  var k10 = document.getElementById("keyword10").value;
+  document.getElementById("key10").innerHTML = k10;
+}
+</script>
   </main>
 
   <footer class="mastfoot mt-auto">
-
   </footer>
 </div>
-
-
-
 </body>
 </html>

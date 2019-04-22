@@ -1,9 +1,10 @@
 //import javax.mail.*;
 //import javax.mail.internet.*;
 import java.util.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,23 +18,25 @@ public class MasterServlet extends HttpServlet
 
 	int count;
 	MySQLConnector mc;
+	String fPath = "C:\\Users\\andre\\git\\4330Capstone\\html\\";
 	
 	public void init() throws ServletException 
 	{
-	      mc = new MySQLConnector("Andrew", "cbasfish", "test");
-	      count = 0;
-	      System.out.println(count);
-	      File f = new File("C:\\Java\\TestFile"+count+".txt");
-	      FileWriter fw;
+        mc = new MySQLConnector("Andrew", "cbasfish", "test");
+        count = 3;
+		File f = new File(fPath + "Test"+count+".txt");
+		System.out.println(mc.retrieve("Select * from documents;"));
 		try {
-			fw = new FileWriter(f);
-			fw.append("uh plz work lol" +count);
+		if(f.createNewFile())
+		{
+			f.setWritable(true);
+			FileWriter fw = new FileWriter(f);
+			fw.write("uh plz work lol" +count);
 			fw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("fail");
-		}
-	    System.out.println(mc.retrieve("select * from documents"));
+			return;
+		}}
+		catch(Exception e)
+		{}
 	}
 	
 	
@@ -47,19 +50,15 @@ public class MasterServlet extends HttpServlet
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		Scanner sc; // we will scan the html docs in each case and edit them before printing it using response writer
 		
-		if(type == null)
-			return;
+		System.out.println(type);
 		
-		File f = new File("C:\\Java\\TestFile"+count+".txt");
-		if(f.createNewFile())
-		{
-			f.setWritable(true);
-			FileWriter fw = new FileWriter(f);
-			fw.write("uh plz work lol" +count);
-			fw.close();
-			return;
-		}
+		String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
+
+		response.getWriter().write(text);
 		
+		return;
+
+		/*
 		switch(type)
 		{
 		case "create"://sends to Documents
@@ -110,7 +109,7 @@ public class MasterServlet extends HttpServlet
 			{
 				
 			}
-			*/
+			
 		case "titles":
 			
 		case "titleAndFullbody":
@@ -123,7 +122,8 @@ public class MasterServlet extends HttpServlet
 			
 		case "delete":
 			
-		}
+		}*/
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
