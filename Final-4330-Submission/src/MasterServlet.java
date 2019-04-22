@@ -22,17 +22,19 @@ public class MasterServlet extends HttpServlet
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		Scanner sc; // we will scan the html docs in each case and edit them before printing it using response writer
 		
+		if(type == null)
+			return;
 		switch(type)
 		{
-		case "create":
-		case "login":
-		case "email":
-		case "titles":
-		case "titleAndFullbody":
-		case "wordcloud":
-		case "search":
-		case "upload":
-		case "delete":
+			case "create":
+			case "login":
+			case "email":
+			case "titles":
+			case "titleAndFullbody":
+			case "wordcloud":
+			case "search":
+			case "upload":
+			case "delete":
 		}
 	}
 
