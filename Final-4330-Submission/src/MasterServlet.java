@@ -1,5 +1,4 @@
-import javax.mail.*;
-import javax.mail.internet.*;
+
 import java.util.*;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,9 @@ public class MasterServlet extends HttpServlet
 		
 		switch(type)
 		{
-		case "create"://sends to Documents
+		case "create":
+		
+		case "create complete"://sends to Documents
 			
 			sc = new Scanner(new File("../HTML/documents.html"));
 			
@@ -36,51 +37,64 @@ public class MasterServlet extends HttpServlet
 			
 			response.getWriter().write("");
 			
-		case "login"://sends to Documents
+		case "login":
+			
+		case "login complete"://sends to Documents
+			
+			sc = new Scanner(new File("../HTML/documents.html"));
 			
 			//verify user
 			boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
 			
 			//fetch titles
-			List<String> titlesL = getTitles();
+			List<String> titlesLC = getTitles();
+			
+			//update default titles
+			
+		case "email":
+			
+			
+			
+		case "email complete": //sends to Documents
+			
+			sc = new Scanner(new File("../HTML/documents.html"));
+			
+			//fetch titles
+			List<String> titlesEC = getTitles();
 			
 			//update default titles
 			
 			
-		case "email":
-			Properties properties = System.getProperties();
-			properties.setProperty("mail.smtp.host", "localhost");
-			Session session = Session.getDefaultInstance(properties);
+		case "documents": //sends to Documents
 			
-			String to = "abc@gmail.com";
-			String pass = "password123";
+			sc = new Scanner(new File("../HTML/documents.html"));
 			
-			try
-			{
-				MimeMessage message = new MimeMessage(session);
-				message.setFrom(new InternetAddress("wordcloud@gmail.com"));
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-				message.setSubject("word cloud account password");
-				message.setText(pass);
-				Transport.send(message);
-			}
+			//fetch titles
+			List<String> titlesD = getTitles();
 			
-			catch(MessagingException mex)
-			{
-				
-			}
+			//update default titles
 			
-		case "titles":
 			
-		case "titleAndFullbody":
+		case "open": // sends to output
 			
-		case "wordcloud":
+			sc = new Scanner(new File("../HTML/documents.html"));
 			
-		case "search":
+			//fetch titles
+			String titleAndFullbody = getTitleAndFullbody();
 			
-		case "upload":
+			//update default titles			
 			
-		case "delete":
+		case "wordcloud": // sends to output
+			
+		case "search": // sends to search
+			
+		case "search complete": // sends to documents
+			
+		case "upload": // sends to upload
+			
+		case "upload complete": // sends to documents
+			
+		case "delete": // sends to documents
 			
 		}
 	}
