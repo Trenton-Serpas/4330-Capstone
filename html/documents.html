@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <title>Documents</title>
 
-   <title>Welcome</title>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -132,45 +132,92 @@
 
     </style>
     <link href="cover.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
-<body>
-<body class="text-center">
+  <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
       <h3 class="masthead-brand">CSC 4330</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="signup.html">Signup</a>
-		<a class="nav-link" href="documents.html">Documents</a>
+		<a class="nav-link active" href="documents.html">Documents</a>
 		<a class="nav-link" href="search.html">Search</a>
       </nav>
     </div>
-	<hr>asdfasdflkjas dfljsalfd jaslf jas;lk fjs flsa jfals f </hr>
-
-
-<form action="./MasterServlet" method="get">
-<input type="hidden" name="type" value="login">
-<input type="submit" value="Clickme">
-
-</form>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Welcome!</h1>
-    <p class="lead">Sign in to find great documents and if you have not signed up then sign up!
-	</p>
-    <p class="lead">
-      <a href="signin.html" class="btn btn-lg btn-secondary">Sign In</a>
-    </p>
+  <div id="table">
+  <form>
+	<table style="width:100%" id="actualtable">
+  <tr>
+    <th id = "title">Documents</th>
+    <th>Open/Word Cloud/Delete</th> 
+  </tr>
+</table>
+</form>
+<br>
+<br>
+<a class ="nav-link" href="add.html">&#x2A01 Add Document</a>
+</div>
   </main>
 
   <footer class="mastfoot mt-auto">
-
   </footer>
 </div>
+<script>  
+var titles = ["The Hunter's Wife", "An Occurance at Owl Creek Bridge", "The Call of Cthulhu", "A Vine on a House", "Alexandre", "A New England Nun", "A Jury of Her Peers", "The Man in the Brown Coat", "To Bulid a Fire", "About Love"];
+var element = document.getElementById("actualtable");
+var str = "<tr> <th id = 'title'>Documents</th> <th>Open/Word Cloud/Delete</th> </tr>";
+for (var i = 0; i < titles.length; i++){
+str = str.concat("<tr> <td id = 'title"+i+"'>"+titles[i]+"</td> <td><button onclick='myFunction()'>Open</button> <button onclick='myFunction2()'>Word Cloud</button> <button onclick='myFunction()3'>Delete</button></td> </tr>");
+}
+element.innerHTML = str;
+function myFunction(){
+var ele = document.getElementById("table");
+ele.innerHTML = "<h1>The Hunter's Wife</h1><p>It was the hunter's first time outside Montana. He woke, stricken still with the hours-old vision of ascending through rose-lit cumulus, of houses and barns like specks deep in the snowed-in valleys, all the scrolling country below looking December—brown and black hills streaked with snow, flashes of iced-over lakes, the long braids of a river gleaming at the bottom of a canyon. Above the wing the sky had deepened to a blue so pure he knew it would bring tears to his eyes if he looked long enough. Now it was dark. The airplane descended over Chicago, its galaxy of electric lights, the vast neighborhoods coming clearer as the plane glided toward the airport—streetlights, headlights, stacks of buildings, ice rinks, a truck turning at a stoplight, scraps of snow atop a warehouse and winking antennae on faraway hills, finally the long converging parallels of blue runway lights, and they were down.He walked into the airport, past the banks of monitors. Already he felt as if he'd lost something, some beautiful perspective, some lovely dream fallen away. He had come to Chicago to see his wife, whom he had not seen in twenty years. She was there to perform her magic for a higher-up at the state university. Even universities, apparently, were interested in what she could do. Outside the terminal the sky was thick and gray and hurried by wind. Snow was coming. A woman from the university met him and escorted him to her Jeep. He kept his gaze out the window.</p>";
 
+var keywords = ["snow", "blue", "some", "hills", "ice", "out", "coming", "look", "long", "lights"];
+var colors = ["Thistle", "Aqua", "SpringGreen", "CornflowerBlue", "DarkOrchid", "SeaGreen", "yellow", "Coral", "Crimson", "teal"]; 
+for(var i = 0; i < keywords.length; i++){
+var oldString = keywords[i];
+var text = $('p').html().replace(RegExp(oldString, "gi"), "<span style = 'color: "+colors[i]+";font-weight: bold;text-transform: uppercase;'>"+keywords[i]+"</span>");
+$('p').html(text);
+}
+}
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+function myFunction2()
+{
+    var out = "";
+    var words = new Array("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10");
+    var sizes = Array
+    (
+        "4.0em",
+        "3.6em",
+        "3.2em",
+        "2.8em",
+        "2.6em",
+        "2.4em",
+        "2.2em",
+        "2.2em",
+        "2.0em",
+        "1.8em"
+    );
+    var ele = document.getElementById("table");
+    for (var i=3; i<13; i++)
+    {
+        out = out.concat("<span style='font-family: Tahoma; letter-spacing: 3px; font-size: " + sizes[i%getRandomInt(1,10)] + "; color: rgb("+Math.floor(Math.random() * 255)+", "+Math.floor(Math.random() * 255)+", "+Math.floor(Math.random() * 255)+");' > &nbsp; " + words[i%10] + "&nbsp; </span>");
+    }
+    ele.innerHTML = out;
+}
 
+</script>
 
 </body>
 </html>

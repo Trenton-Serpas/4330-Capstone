@@ -1,5 +1,6 @@
 import java.sql.*;
 
+
 public class MySQLConnector 
 {
 	String username = null;
@@ -11,7 +12,18 @@ public class MySQLConnector
 	{
 		username = user;
 		password = pass;
-		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (ClassNotFoundException e1) {
+			System.out.println("Error: Unable to find DB connector");
+			System.out.println(e1);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try
 		{
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database, username, password);
@@ -19,6 +31,7 @@ public class MySQLConnector
 		catch(SQLException e)
 		{
 			System.out.println("Error: Unable to connect to DB");
+			System.out.println(e);
 		}
 		
 	}
