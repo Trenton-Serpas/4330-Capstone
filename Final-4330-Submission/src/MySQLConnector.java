@@ -122,19 +122,20 @@ public class MySQLConnector
         }
         catch(Exception e){
             System.out.println("Failed to add to MySQL DB."); 
+            System.out.println(e);
             return false;
         }
         
         return true;
     }
 	
-	public void addUser(String email, String pass)
+	public void addUser(String email, String pass, String name1, String name2)
 	{
         try{
             //Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", username, password);
             Statement stmt = con.createStatement(); 
-            stmt.executeUpdate("insert into test.users (pass, email)  values('" + pass + "', '" + email+ "');");
+            stmt.executeUpdate("insert into test.users (pass, email, fName, lName)  values('" + pass + "', '" + email+ "', '" + name1 + "', '" + name2 + "');");
         }
         catch(Exception e){
             System.out.println("Failed to add to MySQL DB."); 

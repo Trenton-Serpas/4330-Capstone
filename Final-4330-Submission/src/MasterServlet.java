@@ -64,10 +64,10 @@ public class MasterServlet extends HttpServlet
 				String html2 = populateHTML("documents.html");
 				
 				//create user
-				createUser(request.getParameter("email"), request.getParameter("pass"));
+				createUser(request.getParameter("email"), request.getParameter("pass"), request.getParameter("firstname"), request.getParameter("lastname"));
 	
 				//update default titles
-				response.getWriter().write(populateTitles(html2));
+				response.getWriter().write(populateTitles(html2, getTitles()));
 				break;
 				
 			case "login": // sends to signin
@@ -81,13 +81,13 @@ public class MasterServlet extends HttpServlet
 			case "login complete"://sends to Documents
 				
 				//populate string
-				String html3 = populateHTML("documents.html");
+				String html3 = populateHTML("loginauth.html");
 				
 				//verify user
-				login(request.getParameter("email"), request.getParameter("pass"));
-				
-				//update default titles
-				response.getWriter().write(populateTitles(html3));
+				if(login(request.getParameter("email"), request.getParameter("pass")))
+					response.getWriter().write(html3.replaceAll("BODYHERE", "Successfully Logged in!"));
+				else
+					response.getWriter().write(html3.replaceAll("BODYHERE", "You're not in the system!"));
 				break;
 				
 			case "email": // sends to passwordemail.html
@@ -104,7 +104,7 @@ public class MasterServlet extends HttpServlet
 				String html5 = populateHTML("documents.html");
 	
 				//update default titles	
-				response.getWriter().write(populateTitles(html5));
+				response.getWriter().write(populateTitles(html5, getTitles()));
 				break;
 				
 			case "documents": //sends to Documents
@@ -113,7 +113,7 @@ public class MasterServlet extends HttpServlet
 				String html6 = populateHTML("documents.html");
 							
 				//update default titles		
-				response.getWriter().write(populateTitles(html6));
+				response.getWriter().write(populateTitles(html6, getTitles()));
 				break;
 				
 			case "open": // sends to output
@@ -136,17 +136,8 @@ public class MasterServlet extends HttpServlet
 				String html8 = populateHTML("wordcloud.html");
 				
 				String[] keywords = getKeywords(request.getParameter("title"));
-			
-				String keywordString = "";
-				int i;
-				for(i = 0; i < keywords.length - 2; i++)
-				{
-					keywordString += "\"" + (keywords[i] + "\", ");
-				}
-				keywordString += "\"" + keywords[i] + "\"";
-				html8 = html8.replaceAll("WORDSHERE", keywordString);
 				
-				response.getWriter().write(html8);
+				response.getWriter().write(populateTitles(html8, keywords));
 				break;
 				
 			case "search": // sends to search
@@ -162,22 +153,9 @@ public class MasterServlet extends HttpServlet
 				//populate string
 				String html10 = populateHTML("documents.html");
 				
-				String[] keys = new String[]{request.getParameter("key1"), request.getParameter("key2"), request.getParameter("key3"), request.getParameter("key4")};
+				String[] keys = new String[]{request.getParameter("key1"), request.getParameter("key2"), request.getParameter("key3"), request.getParameter("key4")};		
 				
-				ArrayList<String> validTitles = new ArrayList<String>();
-				validTitles = search(keys);
-				
-				
-				String temp = "";
-				int is;
-				for(is = 0; is < validTitles.size() - 2; is++)
-				{
-					temp += "\"" + (validTitles.get(is) + "\", ");
-				}
-				
-				temp += "\"" + (validTitles.get(is)) + "\"";
-				
-				response.getWriter().write(html10.replaceAll("WORDSHERE", temp));
+				response.getWriter().write(populateTitles(html10, search(keys)));
 				break;
 				
 			case "upload": // sends to add
@@ -195,7 +173,7 @@ public class MasterServlet extends HttpServlet
 				
 				uploadDoc(request.getParameter("title"), request.getParameter("body"));
 				
-				response.getWriter().write(populateTitles(html12));
+				response.getWriter().write(populateTitles(html12, getTitles()));
 				break;
 				
 			case "delete": // sends to documents
@@ -205,7 +183,7 @@ public class MasterServlet extends HttpServlet
 				
 				deleteDoc(request.getParameter("title"));
 				
-				response.getWriter().write(populateTitles(html13));
+				response.getWriter().write(populateTitles(html13, getTitles()));
 				break;
 		}
 	}
@@ -216,20 +194,31 @@ public class MasterServlet extends HttpServlet
 		doGet(request, response);
 	}
 	
-	private String populateTitles(String html)
+	private String populateTitles(String html, String[] data)
 	{
-		String titlesHTML = "";
-		List<String> titles = Arrays.asList(getTitles());
-		int i;
-		for(i = 0; i < titles.size() - 2; i++)
+		//System.out.println("ok there's this much data " + data.length);
+		if(data == null || data.length == 0)
 		{
-			titlesHTML += "\"" + (titles.get(i) + "\", ");
+			//System.out.println("we out!");
+			return html.replaceAll("WORDSHERE", "");
 		}
+		else if(data.length == 1)
+		{
+			//System.out.println(data[0]);
+			return html.replaceAll("WORDSHERE", "\""+data[0]+"\"");
+		}
+
+		//System.out.println("data3 is \"" + data[2] + "\"");
 		
-		titlesHTML += "\"" + (titles.get(i)) + "\"";
+		String temp = "";
+		int i;
+		
+		for(i = 0; i <= data.length - 2; i++)
+			temp += "\"" + data[i] + "\", ";
+		
+		temp += "\"" + data[i] + "\"";
 		//System.out.println(titlesHTML);
-		return html.replaceAll("WORDSHERE", titlesHTML);
-		
+		return html.replaceAll("WORDSHERE", temp);
 	}
 
 	private String populateHTML(String fName)
@@ -248,10 +237,12 @@ public class MasterServlet extends HttpServlet
 		return html;
 	}
 	
-	private ArrayList<String> search(String[] keys)
+	private String[] search(String[] keys)
 	{
 		ArrayList<String> retVal = new ArrayList<String>();
 		String[] titles = getTitles();//getTitles();
+		if(titles == null || titles.length < 1)
+			return null;
 		for(int i = 0; i < titles.length; i++)
 		{
 			String[] keywords = getKeywords(titles[i]);
@@ -269,7 +260,7 @@ public class MasterServlet extends HttpServlet
 			}
 		}
 		
-		return retVal;
+		return retVal.toArray(new String[retVal.size()]);
 	}
 	public void deleteDoc(String title)
 	{
@@ -290,15 +281,17 @@ public class MasterServlet extends HttpServlet
 		String[] temp = mc.retrieve("select keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10 from documents where title = \"" + title + "\";").split("\n", -1);
 		if (temp.length > 1)
 		{
-			return temp[1].split("\\0174{2}", -1);
+			return temp[1].split("\\0174{2}", 0);
 		}
-		return new String[]{""}; //remove column names, second split patter is 2 copies of octal value 174 aka |
+		return null; //remove column names, second split patter is 2 copies of octal value 174 aka |
 	}
 	
 	public String[] getTitles()
 	{
-		String temp[] = mc.retrieve("select title from documents;").split("\n", -1);
-		return Arrays.copyOfRange(temp, 1, temp.length);
+		String temp[] = mc.retrieve("select title from documents;").split("\n", 2);
+		if(temp.length <= 1)
+			return null;
+		return temp[1].split("\n", 0);
 	}
 	
 	public String getBody(String title)
@@ -310,9 +303,9 @@ public class MasterServlet extends HttpServlet
 		return "";	
 	}
 	
-	public void createUser(String email, String pass)
+	public void createUser(String email, String pass, String name1, String name2)
 	{
-		mc.addUser(email, pass);
+		mc.addUser(email, pass, name1, name2);
 	}
 	
 	public void deleteUser(String email)
@@ -322,7 +315,7 @@ public class MasterServlet extends HttpServlet
 	
 	public boolean login(String email, String pass)
 	{
-		String[] temp = mc.retrieve("select email, pass from users where email = \"" + email + "\" and pass = \"" + pass + "\";").split("\n", -1);
+		String[] temp = mc.retrieve("select email, pass from users where email = \"" + email + "\" and pass = \"" + pass + "\";").split("\n", 0);
 		if(temp.length > 1)
 			return true;
 		return false;
