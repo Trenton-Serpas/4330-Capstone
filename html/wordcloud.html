@@ -29,7 +29,7 @@
 	a,
 	a:focus,
 	a:hover,
-	input[type="button"]:hover{
+	input.link:hover{
 		color: #fff;
 	}
 
@@ -128,7 +128,7 @@
 	.mastfoot {
 		color: rgba(255, 255, 255, .5);
 	}
-	 input[type="button"] {
+	 input.link {
      background:none!important;
      color:inherit;
      border:none; 
@@ -155,19 +155,19 @@
       <nav class="nav nav-masthead justify-content-center">
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="index" name="type">
-	  <input type="submit" value="Home">
+	  <input type="submit" value="Home" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="create" name="type">
-	  <input type="submit" value="Signup">
+	  <input type="submit" value="Signup" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="documents" name="type">
-	  <input type="submit" value="Documents">
+	  <input type="submit" value="Documents" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="search" name="type">
-	  <input type="submit" value="Search">
+	  <input type="submit" value="Search" class="link">
 		</form>
       </nav>
     </div>

@@ -28,7 +28,7 @@
 	a,
 	a:focus,
 	a:hover,
-input[type="button"]:hover	{
+input.link:hover	{
 		color: #fff;
 	}
 
@@ -179,7 +179,7 @@ body {
 .form-signin #inputrePassword {
  margin-bottom: 10px;
  }
-  input[type="button"] {
+  input.link {
      background:none!important;
      color:inherit;
      border:none; 
@@ -202,11 +202,11 @@ body {
       <nav class="nav nav-masthead justify-content-center">
       <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="index" name="type">
-	  <input type="submit" value="Home">
+	  <input type="submit" value="Home" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="create" name="type">
-	  <input type="submit" value="Signup">
+	  <input type="submit" value="Signup" class="link">
 	  </form>
       </nav>
     </div>
