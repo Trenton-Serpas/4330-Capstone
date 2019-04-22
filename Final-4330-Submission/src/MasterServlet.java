@@ -1,7 +1,8 @@
-
 import java.util.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +14,48 @@ public class MasterServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
+	int count;
+	MySQLConnector mc;
+	String fPath = "C:\\Users\\andre\\git\\4330Capstone\\html\\";
+	
+	public void init() throws ServletException 
+	{
+        mc = new MySQLConnector("Andrew", "cbasfish", "test");
+        count = 3;
+		File f = new File(fPath + "Test"+count+".txt");
+		System.out.println(mc.retrieve("Select * from documents;"));
+		try {
+		if(f.createNewFile())
+		{
+			f.setWritable(true);
+			FileWriter fw = new FileWriter(f);
+			fw.write("uh plz work lol" +count);
+			fw.close();
+			return;
+		}}
+		catch(Exception e)
+		{}
+	}
+	
+	
+    public MasterServlet() 
+    {
+        super();
+    }
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		
+		System.out.println(type);
+		
+		String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
+
+		response.getWriter().write(text);
+		
+		return;
+
+		/*
 		switch(type)
 		{
 		case "index": // sends to case
@@ -38,10 +77,10 @@ public class MasterServlet extends HttpServlet
 			String html2 = populateHTML("../HTML/documents.html");
 			
 			//create user
-			boolean creationSuccess = createUser(request.getParameter("email"), request.getParameter("pass"));
+			//boolean creationSuccess = createUser(request.getParameter("email"), request.getParameter("pass"));
 			
 			//fetch titles
-			List<String> titlesC = getTitles();
+			//List<String> titlesC = getTitles();
 			
 			//update default titles
 			
@@ -61,7 +100,7 @@ public class MasterServlet extends HttpServlet
 			String html3 = populateHTML("../HTML/documents.html");
 			
 			//verify user
-			boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
+			//boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
 			
 			//fetch titles
 			List<String> titlesLC = getTitles();
@@ -172,6 +211,8 @@ public class MasterServlet extends HttpServlet
 			
 			response.getWriter().write(html13);
 		}
+		}*/
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
