@@ -126,7 +126,7 @@ public class MasterServlet extends HttpServlet
 				//fetch title and text
 				String body = getBody(request.getParameter("title"));
 				
-				html7 = html7.replaceAll("INSERTOUTPUTHERE", body);
+				html7 = html7.replaceAll("WORDSHERE", body);
 				
 				//output text		
 				response.getWriter().write(html7);
@@ -138,6 +138,15 @@ public class MasterServlet extends HttpServlet
 				String html8 = populateHTML("output.html");
 				
 				String[] keywords = getKeywords(request.getParameter("email"));
+				
+				String keywordString = "";
+				
+				for(int i = 0; i < keywords.length; i++)
+				{
+					keywordString += (keywords[i] + ", ");
+				}
+				
+				html8 = html8.replaceAll("WORDSHERE", keywordString);
 				
 				response.getWriter().write(html8);
 				break;
@@ -210,7 +219,7 @@ public class MasterServlet extends HttpServlet
 			titlesHTML += (titles.get(i) + ", ");
 		}
 		
-		html = html.replaceAll("INSERTTITLESHERE", titlesHTML);
+		html = html.replaceAll("WORDSHERE", titlesHTML);
 		
 		return titlesHTML;
 	}
