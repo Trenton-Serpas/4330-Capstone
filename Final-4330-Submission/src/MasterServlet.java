@@ -95,7 +95,7 @@ public class MasterServlet extends HttpServlet
 			String html3 = populateHTML("../HTML/documents.html");
 			
 			//verify user
-			//boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
+			boolean loginSuccess = login(request.getParameter("email"), request.getParameter("pass"));
 			
 			//update default titles
 			response.getWriter().write(populateTitles(html3));
@@ -190,8 +190,6 @@ public class MasterServlet extends HttpServlet
 			
 			response.getWriter().write(populateTitles(html13));
 		}
-		}
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
