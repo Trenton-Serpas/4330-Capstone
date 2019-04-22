@@ -12,6 +12,14 @@ public class MasterServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
+	MySQLConnector mc;
+	public void init() throws ServletException 
+	{
+	      mc = new MySQLConnector("Andrew", "cbasfish", "test");
+	      
+	}
+	
+	
     public MasterServlet() 
     {
         super();
@@ -21,6 +29,8 @@ public class MasterServlet extends HttpServlet
 	{
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		Scanner sc; // we will scan the html docs in each case and edit them before printing it using response writer
+		
+		
 		
 		if(type == null)
 			return;
