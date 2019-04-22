@@ -189,16 +189,16 @@ input[type="button"]:hover	{
 	  <input type="button" value="Home">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="create">
+	  <input type="hidden" value="create" name="type">
 	  <input type="button" value="Signup">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="documents">
+	  <input type="hidden" value="documents" name="type">
 	  <input type="button" value="Documents">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="search">
-	  <input type="button" value="Search">
+	  <input type="hidden" value="search" name="type">
+	  <input type="submit" value="Search">
 		</form>
 		</nav>
     </div>
@@ -218,50 +218,7 @@ input[type="button"]:hover	{
 <br>
 
 
-<p id="key1"></p>
-<p id="key2"></p>
-<p id="key3"></p>
-<p id="key4"></p>
-<p id="key5"></p>
-<p id="key6"></p>
-<p id="key7"></p>
-<p id="key8"></p>
-<p id="key9"></p>
-<p id="key10"></p>
 
-<script>
-function myFunction() {
-  var k1 = document.getElementById("keyword1").value;
-  document.getElementById("key1").innerHTML = k1;
-
-  var k2 = document.getElementById("keyword2").value;
-  document.getElementById("key2").innerHTML = k2;
-
-  var k3 = document.getElementById("keyword3").value;
-  document.getElementById("key3").innerHTML = k3;
-
-  var k4 = document.getElementById("keyword4").value;
-  document.getElementById("key4").innerHTML = k4;
-
-  var k5 = document.getElementById("keyword5").value;
-  document.getElementById("key5").innerHTML = k5;
-
-  var k6 = document.getElementById("keyword6").value;
-  document.getElementById("key6").innerHTML = k6;
-
-  var k7 = document.getElementById("keyword7").value;
-  document.getElementById("key7").innerHTML = k7;
-
-  var k8 = document.getElementById("keyword8").value;
-  document.getElementById("key8").innerHTML = k8;
-
-  var k9 = document.getElementById("keyword9").value;
-  document.getElementById("key9").innerHTML = k9;
-
-  var k10 = document.getElementById("keyword10").value;
-  document.getElementById("key10").innerHTML = k10;
-}
-</script>
   </main>
 
   <footer class="mastfoot mt-auto">

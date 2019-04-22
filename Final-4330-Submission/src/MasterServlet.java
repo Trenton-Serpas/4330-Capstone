@@ -35,7 +35,7 @@ public class MasterServlet extends HttpServlet
 	{
 		String type = request.getParameter("type"); // this can also be done using different servlets
 		
-		System.out.println(type + "make sure");
+		System.out.println(type);
 		//String text = new String(Files.readAllBytes(Paths.get(fPath + "signin.html")), StandardCharsets.UTF_8);
 		//response.getWriter().write(text);
 		
@@ -119,7 +119,7 @@ public class MasterServlet extends HttpServlet
 			case "open": // sends to output
 				
 				//populate string
-				String html7 = populateHTML("output.html");
+				String html7 = populateHTML("open.html");
 				
 				//fetch title and text
 				String body = getBody(request.getParameter("title"));
@@ -133,10 +133,12 @@ public class MasterServlet extends HttpServlet
 			case "wordcloud": // sends to output
 				
 				//populate string
-				String html8 = populateHTML("output.html");
+				String html8 = populateHTML("open.html");
 				
-				String[] keywords = getKeywords(request.getParameter("email"));
-				
+				String[] keywords = getKeywords(request.getParameter("title"));
+				for(int i = 0; i < keywords.length; i++)
+					System.out.println(keywords[i]);
+			
 				String keywordString = "";
 				
 				for(int i = 0; i < keywords.length; i++)
@@ -211,15 +213,16 @@ public class MasterServlet extends HttpServlet
 	{
 		String titlesHTML = "";
 		List<String> titles = Arrays.asList(getTitles());
-		
-		for(int i = 0; i < titles.size(); i++)
+		int i;
+		for(i = 0; i < titles.size() - 2; i++)
 		{
-			titlesHTML += (titles.get(i) + ", ");
+			titlesHTML += "\"" + (titles.get(i) + "\", ");
 		}
 		
-		html.replaceAll("WORDSHERE", titlesHTML);
+		titlesHTML += "\"" + (titles.get(i)) + "\"";
+		System.out.println(titlesHTML);
+		return html.replaceAll("WORDSHERE", titlesHTML);
 		
-		return titlesHTML;
 	}
 
 	private String populateHTML(String fName)
@@ -273,8 +276,12 @@ public class MasterServlet extends HttpServlet
 	
 	public String[] getKeywords(String title)
 	{
-		String temp = mc.retrieve("select keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10 from documents where title = \"" + title + "\";");
-		return temp.split("\n", -1)[1].split("\\0174{2}", -1); //remove column names, second split patter is 2 copies of octal value 174 aka |
+		String[] temp = mc.retrieve("select keyword1, keyword2, keyword3, keyword4, keyword5, keyword6, keyword7, keyword8, keyword9, keyword10 from documents where title = \"" + title + "\";").split("\n", -1);
+		if (temp.length > 1)
+		{
+			return temp[1].split("\\0174{2}", -1);
+		}
+		return new String[]{""}; //remove column names, second split patter is 2 copies of octal value 174 aka |
 	}
 	
 	public String[] getTitles()

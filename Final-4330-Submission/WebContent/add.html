@@ -196,19 +196,19 @@ input[type="button"]:hover	{
       <nav class="nav nav-masthead justify-content-center">
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="index" name="type">
-	  <input type="button" value="Home">
+	  <input type="submit" value="Home">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="create">
-	  <input type="button" value="Signup">
+	  <input type="hidden" value="create" name="type">
+	  <input type="submit" value="Signup">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="documents">
-	  <input type="button" value="Documents">
+	  <input type="hidden" value="documents" name="type">
+	  <input type="submit" value="Documents">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="search">
-	  <input type="button" value="Search">
+	  <input type="hidden" value="search" name="type">
+	  <input type="submit" value="Search">
 		</form>
       </nav>
     </div>
@@ -233,25 +233,7 @@ input[type="button"]:hover	{
 <br>
 <br>
 <br>
-<p id="Dtitle"></p>
-<p id="Dcontent"></p>
 
-<script>
-function myFunction() {
-  var ws = new WebSocket("ws://localhost:61111");
- 
-  var k1 = document.getElementById("title").value;
-  document.getElementById("Dtitle").innerHTML = k1;
-
-  var k2 = document.getElementById("content").value;
-  document.getElementById("Dcontent").innerHTML = k2;
-    ws.onopen = function(){
-	ws.send("title");
-	ws.send("content");
-	}
-}
-
-</script>
   </main>
 
   <footer class="mastfoot mt-auto">
