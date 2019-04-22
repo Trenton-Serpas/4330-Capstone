@@ -92,6 +92,23 @@ public class MySQLConnector
 		return doc;
 	}
 	
+	public void update(String executeThis)
+	{
+		try 
+		{
+			//Class.forName("com.mysql.jdbc.Driver");  This is depriciated apparently  
+			//System.out.println("ok..."); 
+			
+			Statement stmt = con.createStatement();  
+			stmt.executeUpdate(executeThis);  
+		}
+		catch(Exception e)
+		{ 
+			System.out.println("uh oh\n"+e); 
+		}  
+
+	}
+	
 	public boolean add(String title, String content, String[] keywords)
 	{
 		//String sanitizedKeywords;  On second thought, parser.getTopTen always returns an array with 10 elems
