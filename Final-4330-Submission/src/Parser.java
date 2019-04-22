@@ -42,7 +42,7 @@ public class Parser
 		
 		wordMap = allWords;
 	}
-	
+
 	public String[] getTopTen()
 	{
 		String[] topTen = new String[10];
