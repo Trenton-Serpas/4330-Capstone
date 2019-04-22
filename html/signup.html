@@ -204,11 +204,11 @@ body {
       <nav class="nav nav-masthead justify-content-center">
       <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="index" name="type">
-	  <input type="button" value="Home">
+	  <input type="submit" value="Home">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="create">
-	  <input type="button" value="Signup">
+	  <input type="hidden" value="create" name="type">
+	  <input type="submit" value="Signup">
 	  </form>
       </nav>
     </div>
@@ -227,8 +227,8 @@ body {
   <input type="hidden" name="type" value="create complete">
   <input type="submit" value="Sign up" name="signup" class="btn btn-lg btn-primary btn-block"><br>
   	 <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="login">
-	  <input type="button" value="Already Signed up?">
+	  <input type="hidden" value="login" name="type">
+	  <input type="submit" value="Already Signed up?">
 	  </form>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>

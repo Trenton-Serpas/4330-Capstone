@@ -170,19 +170,19 @@ input[type="button"].link:hover	{
       <nav class="nav nav-masthead justify-content-center">
 	  <form action="./MasterServlet" method="get">
 	  <input type="hidden" value="index" name="type">
-	  <input type="button" value="Home" class="link">
+	  <input type="submit" value="Home" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="create">
-	  <input type="button" value="Signup" class="link">
+	  <input type="hidden" value="create" name="type">
+	  <input type="submit" value="Signup" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="documents">
-	  <input type="button" value="Documents" class="link">
+	  <input type="hidden" value="documents" name="type">
+	  <input type="submit" value="Documents" class="link">
 	  </form>
 	  <form action="./MasterServlet" method="get">
-	  <input type="hidden" value="search">
-	  <input type="button" value="Search" class="link">
+	  <input type="hidden" value="search" name="type">
+	  <input type="submit" value="Search" class="link">
 		</form>
       </nav>
     </div>
@@ -200,7 +200,11 @@ input[type="button"].link:hover	{
 </form>
 <br>
 <br>
-<a class ="nav-link" href="add.html">&#x2A01 Add Document</a>
+	  <form action="./MasterServlet" method="get">
+	  <input type="hidden" value="upload" name="type">
+	  <input type="submit" value="Add Document" class="link">
+		</form>
+
 </div>
   </main>
 
@@ -213,7 +217,7 @@ var titles = [WORDSHERE];
 var element = document.getElementById("actualtable");
 var str = "<tr> <th id = 'title'>Documents</th> <th>Open/Word Cloud/Delete</th> </tr>";
 for (var i = 0; i < titles.length; i++){
-str = str.concat("<tr> <td id = 'title"+i+"'>"+titles[i]+"</td> <td><form action='./MasterServlet' method='get'><input type='hidden' name='type' value='open'><input type='button' value='Open'></form> <form action='./MasterServlet' method='get'><input type='hidden' name='type' value='wordcloud'><input type='button' value='WordCloud'></form> <form action='./MasterServlet' method='get'><input type='hidden' name='type' value='delete'><input type='button' value='Delete'></form></td> </tr>");
+str = str.concat("<tr> <td id = 'title"+i+"'>"+titles[i]+"</td> <td><form action='./MasterServlet' method='get'><input type='hidden' name='type' value='open'><input type='submit' value='Open'></form> <form action='./MasterServlet' method='get'><input type='hidden' name='type' value='wordcloud'><input type='submit' value='WordCloud'></form> <form action='./MasterServlet' method='get'><input type='hidden' name='type' value='delete'><input type='submit' value='Delete'></form></td> </tr>");
 }
 element.innerHTML = str;
 </script>
