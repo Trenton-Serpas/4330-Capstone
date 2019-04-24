@@ -3,9 +3,5 @@ The purpose of this project is to allow the user to scan a set of documents for 
 
 **Group Discord:** https://discord.gg/h6247Wu
 
-## Please add chosen contact info below:
+## How to run:
 
-### Trenton Serpas
-* Discord: GranpaWalton#0277
-* Phone: 225-933-6763
-* Email: trentc7@yahoo.com
